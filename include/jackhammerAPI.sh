@@ -57,6 +57,18 @@ CheckForNeededCmds(){
 		echo "sudo apt-get install -y poppler-utils"
 		exit
 	fi
+
+	#check for `pandoc`
+	if ! command -v pandoc &> /dev/null
+	then
+		echo "Jackhammer Text Miner: Analytics"
+		echo "================================"
+		echo "'pandoc' not found!"
+		echo ""
+		echo "Try installing it with:"
+		echo "sudo apt-get install -y pandoc"
+		exit
+	fi
 }
 
 

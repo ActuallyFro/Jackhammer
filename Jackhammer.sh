@@ -1,8 +1,9 @@
 #!/bin/bash
 source $(dirname $0)/include/jackhammerAPI.sh
 
-SetupMainFolder
+CheckForNeededCmds
 
+SetupMainFolder
 cd Analysis_Folder
 CheckMainFolderEmpty
 

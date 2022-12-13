@@ -45,6 +45,21 @@ CleanAndSetupFolders(){
 	mkdir -p $ConvertedDocsPath
 }
 
+CheckForNeededCmds(){
+	# check for `pdftotext`
+	if ! command -v pdftotext &> /dev/null
+	then
+		echo "Jackhammer Text Miner: Analytics"
+		echo "================================"
+		echo "'pdftotext' not found!"
+		echo ""
+		echo "Try installing it with:"
+		echo "sudo apt-get install -y poppler-utils"
+		exit
+	fi
+}
+
+
 
 SetupMainFolder(){
 if [ ! -d Analysis_Folder ]; then

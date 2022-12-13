@@ -52,9 +52,10 @@ if [ ! -d Analysis_Folder ]; then
 	
   echo "Jackhammer Text Miner: Analytics"
   echo "================================"
-	echo "Analysis_Folder not found. Creating one for you!"
-	echo "Please place your folders, with PDF's, in the Analysis_Folder folder."
+	echo "Analysis_Folder not found."
 	echo ""
+	echo "Creating one for you!"
+	echo "Please place your folders, with PDF's, in the Analysis_Folder folder."
 	echo "Then run this script again."
 	exit
 fi
@@ -65,8 +66,9 @@ CheckMainFolderEmpty(){
 if [ ! "$(ls -A .)" ]; then
 	echo "Jackhammer Text Miner: Analytics"
 	echo "================================"
-	echo "Analysis_Folder is empty. Please place your folders, with PDF's, in the Analysis_Folder folder."
+	echo "Analysis_Folder is empty."
 	echo ""
+	echo "Please place your folders, with PDF's, in the Analysis_Folder folder."
 	echo "Then run this script again."
 	exit
 fi	

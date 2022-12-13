@@ -45,6 +45,35 @@ CleanAndSetupFolders(){
 	mkdir -p $ConvertedDocsPath
 }
 
+
+SetupMainFolder(){
+if [ ! -d Analysis_Folder ]; then
+	mkdir Analysis_Folder
+	
+  echo "Jackhammer Text Miner: Analytics"
+  echo "================================"
+	echo "Analysis_Folder not found. Creating one for you!"
+	echo "Please place your folders, with PDF's, in the Analysis_Folder folder."
+	echo ""
+	echo "Then run this script again."
+	exit
+fi
+
+}
+
+CheckMainFolderEmpty(){
+if [ ! "$(ls -A .)" ]; then
+	echo "Jackhammer Text Miner: Analytics"
+	echo "================================"
+	echo "Analysis_Folder is empty. Please place your folders, with PDF's, in the Analysis_Folder folder."
+	echo ""
+	echo "Then run this script again."
+	exit
+fi	
+}
+
+
+
 GetPDFs(){
 	Names=(`ls | grep pdf | awk -F . '{print $1}'`) #Find Pdf's; BUG: This will ignore pdf names with multiple dots within its names
 	Names2=(`ls | grep txt`)

@@ -358,7 +358,7 @@ Counter3=0
 		GlobalContextWordListBefore_Filtered_Summary=$ReportPath_ContextWords"/"`date --iso-8601`"_Global_List_Word_"$Counter2"_"$i"_List_02_Before_Filtered_"$Filter1"_Summary.txt"
 		GlobalContextWordListAfter_Filtered_Summary=$ReportPath_ContextWords"/"`date --iso-8601`"_Global_List_Word_"$Counter2"_"$i"_List_03_After_Filtered_"$Filter1"_Summary.txt"
 
-		echo "###Top Global Word \""$i"\" ["$Counter2"/5]: Top 10 Context Words - Before and After Breakout" >> $FinalReport
+		echo "### Top Global Word \""$i"\" ["$Counter2"/5]: Top 10 Context Words - Before and After Breakout" >> $FinalReport
 		echo "| **Occurrences** | **Word Before** | **Core Word** | **Word After** | **Occurrences** |" >> $FinalReport
 		echo "|:---------------:|:---------------:|:-------------:|:--------------:|:---------------:|" >> $FinalReport
 		tail -n 10 $GlobalContextWordListBefore_Filtered_Summary | sort -nr > 1.txt #awk '{print "| "$1" | "$2" |"}' >> $FinalReport
@@ -386,7 +386,7 @@ Counter3=0
 
 		echo "" >> $FinalReport
 
-		echo "###Top Global Word \""$i"\" ["$Counter2"/5]: Top 10 Context Words - Before and After Combined" >> $FinalReport
+		echo "### Top Global Word \""$i"\" ["$Counter2"/5]: Top 10 Context Words - Before and After Combined" >> $FinalReport
 		echo "| **Occurrences** | **Word** |" >> $FinalReport
 		echo "|:----------:|:----:|" >> $FinalReport
 			tail -n 10 $GlobalContextWordListBoth_Filtered_Summary | sort -nr | awk '{print "| "$1" | "$2" |"}' >> $FinalReport
@@ -472,7 +472,7 @@ if [[ "${#Names[*]}" > "1" ]]; then #Will only process "Per File" info when ther
 		PDFInformationReport=$ConvertedDocsPath"/"`date --iso-8601`"_"$j"_Info.txt" # PDF Information saved to file
 		cat $PDFInformationReport | grep "SHA256" >> $FinalReport
 		echo "" >> $FinalReport
-		echo "###Top 25 Words" >> $FinalReport
+		echo "### Top 25 Words" >> $FinalReport
 		echo "| **Occurrences** | **Word** |" >> $FinalReport
 		echo "|:---------------:|:--------:|" >> $FinalReport
 		tail -n 25 $SingleFileList_Filtered_Summary | sort -nr | awk '{print "| "$1" | "$2" |"}' >> $FinalReport
@@ -490,7 +490,7 @@ if [[ "${#Names[*]}" > "1" ]]; then #Will only process "Per File" info when ther
 			SingleFileContextWordListBefore_Filtered_Summary=$ReportPath_ContextWords"/"`date --iso-8601`"_"$j"_List_Word_"$Counter2"_"$i"_List_02_Before_Filtered_"$Filter1"_Summary.txt"
 			SingleFileContextWordListAfter_Filtered_Summary=$ReportPath_ContextWords"/"`date --iso-8601`"_"$j"_List_Word_"$Counter2"_"$i"_List_03_After_Filtered_"$Filter1"_Summary.txt"
 
-			echo "###Top "$j" Word \""$i"\" ["$Counter2"/5]: Top 10 Context Words - Before and After Breakout" >> $FinalReport
+			echo "### Top "$j" Word \""$i"\" ["$Counter2"/5]: Top 10 Context Words - Before and After Breakout" >> $FinalReport
 			echo "| **Occurrences** | **Word Before** | **Core Word** | **Word After** | **Occurrences** |" >> $FinalReport
 			echo "|:---------------:|:---------------:|:-------------:|:--------------:|:---------------:|" >> $FinalReport
 			tail -n 10 $SingleFileContextWordListBefore_Filtered_Summary | sort -nr > 1.txt #awk '{print "| "$1" | "$2" |"}' >> $FinalReport
@@ -515,7 +515,7 @@ if [[ "${#Names[*]}" > "1" ]]; then #Will only process "Per File" info when ther
 
 			echo "" >> $FinalReport
 
-			echo "###Top "$j" Word \""$i"\" ["$Counter2"/5]: Top 10 Context Words - Before and After Combined" >> $FinalReport
+			echo "### Top "$j" Word \""$i"\" ["$Counter2"/5]: Top 10 Context Words - Before and After Combined" >> $FinalReport
 			echo "| **Occurrences** | **Word** |" >> $FinalReport
 			echo "|:---------------:|:--------:|" >> $FinalReport
 			tail -n 10 $SingleFileContextWordListBoth_Filtered_Summary | sort -nr | awk '{print "| "$1" | "$2" |"}' >> $FinalReport
@@ -545,6 +545,12 @@ FinalReportSize=`ls -al | grep $FinalReport | awk '{print $5}'`
 FinalReportSizeH=`ls -alh | grep $FinalReport | awk '{print $5}'`
 echo `date`" Duration: "$TotalRunTime" seconds Size: "$FinalReportSizeH"("$FinalReportSize")" >> $LogFile
 ############################################
+
+# remove all lines that match '||| |    | |' within $FinalReport with awk
+awk '!/^\|\|\| \|    \| \|/' $FinalReport > FinalReport2
+mv FinalReport2 $FinalReport
+
+
 
 
 #PDF Generation
